@@ -1,0 +1,20 @@
+# Database config with credentials
+config/database.example.php
+config/database.production.php
+
+# Environment files
+.env
+
+# Logs
+storage/logs/*.log
+storage/logs/*.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

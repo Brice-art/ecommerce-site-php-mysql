@@ -82,7 +82,7 @@
                     <div class="product-card">
                         <div class="product-image">
                             <?php if ($product['main_image']): ?>
-                                <img src="/ecommerce-project/public/images/products/<?php echo htmlspecialchars($product['main_image']); ?>"
+                                <img src="images/products/<?php echo htmlspecialchars($product['main_image']); ?>"
                                     alt="<?php echo htmlspecialchars($product['name']); ?>">
                             <?php else: ?>
                                 <div class="no-image">No Image</div>
@@ -92,6 +92,9 @@
                             <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                             <p class="category"><?php echo htmlspecialchars($product['category_name']); ?></p>
                             <div class="price">
+                                <?php if ($product['compare_price']): ?>
+                                    <span class="old-price">$<?php echo number_format($product['compare_price'], 2); ?></span>
+                                <?php endif; ?>
                                 <span class="current-price">$<?php echo number_format($product['price'], 2); ?></span>
                             </div>
                             <div class="product-actions">

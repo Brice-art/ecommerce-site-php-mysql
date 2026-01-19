@@ -11,6 +11,7 @@ require_once '../src/Models/Cart.php';
 require_once '../src/Models/User.php';
 require_once '../src/Controllers/HomeController.php';
 require_once '../src/Controllers/ProductController.php';
+require_once '../src/Controllers/ProfileController.php';
 require_once '../src/Controllers/CartController.php';
 require_once '../src/Controllers/AuthController.php';
 
@@ -65,6 +66,11 @@ switch ($page) {
     case 'logout':
         $controller = new AuthController();
         $controller->logout();
+        break;
+
+    case 'profile':
+        $controller = new ProfileController();
+        $controller->index();
         break;
 
     default:

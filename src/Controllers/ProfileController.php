@@ -26,6 +26,20 @@ class ProfileController
         ]);
     }
 
+    public function edit() {
+        $userId = $_SESSION['user_id'] ?? null;
+        $sessionId = session_id();
+
+        $user = $this->userModel->getUserById($userId);
+
+        $cartItems = (new Cart())->getCartItems($userId, $sessionId);
+
+        $this->view('user/edit', [
+            'user' => $user,
+            'count' => count($cartItems)
+        ]);
+    }
+
     // Load view with header/footer
     private function view($view, $data = [])
     {

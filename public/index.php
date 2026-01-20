@@ -70,7 +70,16 @@ switch ($page) {
 
     case 'profile':
         $controller = new ProfileController();
-        $controller->index();
+        $action = $_GET['action'] ?? 'index';
+
+        switch ($action) {
+            case 'edit':
+                $controller->edit();
+                break;
+            default:
+                $controller->index();
+        }
+
         break;
 
     default:

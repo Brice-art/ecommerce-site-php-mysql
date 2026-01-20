@@ -32,8 +32,8 @@
             <h3 style="margin-top:12px;">Account</h3>
             <p class="muted">Member since: <?= isset($user['created_at']) ? htmlspecialchars($user['created_at']) : '—' ?></p>
             <div class="profile-actions">
-                <a href="index.php?page=user&action=edit" class="btn">Edit Profile</a>
-                <a href="index.php?page=user&action=change_password" class="btn secondary">Change Password</a>
+                <a href="index.php?page=profile&action=edit" class="btn">Edit Profile</a>
+                <a href="index.php?page=profile&action=change_password" class="btn secondary">Change Password</a>
             </div>
         </div>
 

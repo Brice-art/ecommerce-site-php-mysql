@@ -10,7 +10,13 @@ class ProfileController
 
     public function index()
     {
-        $userId = $_SESSION['user_id'] ?? null;
+        // Redirect if not logged in
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: index.php?page=login');
+            exit;
+        }
+
+        $userId = $_SESSION['user_id'];
         $sessionId = session_id();
 
         $user = $this->userModel->getUserById($userId);
@@ -26,16 +32,77 @@ class ProfileController
         ]);
     }
 
-    public function edit() {
-        $userId = $_SESSION['user_id'] ?? null;
-        $sessionId = session_id();
+    public function edit()
+    {
+        // Check login
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: index.php?page=login');
+            exit;
+        }
 
+        $userId = $_SESSION['user_id'];
+
+        // If POST, process the update
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $firstName = trim($_POST['first_name'] ?? '');
+            $lastName = trim($_POST['last_name'] ?? '');
+            $phone = trim($_POST['phone'] ?? '');
+
+            // Validation
+            $errors = [];
+
+            if (empty($firstName)) {
+                $errors[] = 'First name is required';
+            }
+
+            if (empty($lastName)) {
+                $errors[] = 'Last name is required';
+            }
+
+            // If no errors, update
+            if (empty($errors)) {
+                $updateData = [
+                    'email' => $_SESSION['user_email'], // Keep same
+                    'password' => '', // Not changing password
+                    'first_name' => $firstName,
+                    'last_name' => $lastName,
+                    'phone' => $phone,
+                    'role' => $_SESSION['user_role']
+                ];
+
+                if ($this->userModel->updateUser($userId, $updateData)) {
+                    // Update session
+                    $_SESSION['user_name'] = $firstName;
+
+                    // Redirect to profile with success message
+                    $_SESSION['success_message'] = 'Profile updated successfully!';
+                    header('Location: index.php?page=profile');
+                    exit;
+                } else {
+                    $errors[] = 'Failed to update profile';
+                }
+            }
+
+            // Show form again with errors
+            $user = $this->userModel->getUserById($userId);
+            $cartItems = (new Cart())->getCartItems($userId, session_id());
+
+            $this->view('user/edit', [
+                'user' => $user,
+                'errors' => $errors,
+                'title' => 'Edit Profile',
+                'count' => count($cartItems)
+            ]);
+            return;
+        }
+
+        // GET request - show form
         $user = $this->userModel->getUserById($userId);
-
-        $cartItems = (new Cart())->getCartItems($userId, $sessionId);
+        $cartItems = (new Cart())->getCartItems($userId, session_id());
 
         $this->view('user/edit', [
             'user' => $user,
+            'title' => 'Edit Profile',
             'count' => count($cartItems)
         ]);
     }

@@ -1,104 +1,104 @@
-<section class="auth-section">
-    <div class="container">
-        <div class="auth-container">
-            <div class="auth-card">
-                <h1>Edit Account</h1>
+<div class="profile-container">
+    <style>
+        .profile-container {
+            max-width: 600px;
+            margin: 24px auto;
+            padding: 24px;
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px
+        }
 
-                <?php if (isset($errors) && !empty($errors)): ?>
-                    <div class="alert alert-error">
-                        <ul>
-                            <?php foreach ($errors as $error): ?>
-                                <li><?php echo htmlspecialchars($error); ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                <?php endif; ?>
+        .form-group {
+            margin-bottom: 18px
+        }
 
-                <form method="POST" action="index.php?page=user" class="auth-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="first_name">First Name</label>
-                            <input
-                                type="text"
-                                id="first_name"
-                                name="first_name"
-                                class="form-control"
-                                value="<?php echo htmlspecialchars($user['first_name'] ?? ''); ?>"
-                                required>
-                        </div>
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600
+        }
 
-                        <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input
-                                type="text"
-                                id="last_name"
-                                name="last_name"
-                                class="form-control"
-                                value="<?php echo htmlspecialchars($user['last_name'] ?? ''); ?>"
-                                required>
-                        </div>
-                    </div>
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px
+        }
 
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            class="form-control"
-                            value="<?php echo htmlspecialchars($user['email'] ?? ''); ?>"
-                            required>
-                    </div>
+        .alert-error {
+            padding: 12px;
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+            border-radius: 6px;
+            margin-bottom: 18px
+        }
 
-                    <div class="form-group">
-                        <label for="phone">Phone Number (Optional)</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            class="form-control"
-                            value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
-                    </div>
+        .alert-error ul {
+            margin: 0;
+            padding-left: 20px
+        }
+    </style>
 
-                    <!--<div class="form-row">
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                class="form-control"
-                                required
-                                minlength="8"
-                            >
-                            <small class="form-text">At least 8 characters</small>
-                        </div>
+    <h2>Edit Profile</h2>
 
-                        <div class="form-group">
-                            <label for="confirm_password">Confirm Password</label>
-                            <input 
-                                type="password" 
-                                id="confirm_password" 
-                                name="confirm_password" 
-                                class="form-control"
-                                required
-                            >
-                        </div>
-                    </div> 
-
-                    <div class="form-group form-checkbox">
-                        <label>
-                            <input type="checkbox" name="terms" required>
-                            I agree to the <a href="#" target="_blank">Terms and Conditions</a>
-                        </label>
-                    </div> -->
-
-                    <button type="submit" class="btn btn-primary btn-block btn-large">
-                        Confirm Changes
-                    </button>
-                </form>
-
-            </div>
+    <?php if (isset($errors) && !empty($errors)): ?>
+        <div class="alert-error">
+            <ul>
+                <?php foreach ($errors as $error): ?>
+                    <li><?php echo htmlspecialchars($error); ?></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-    </div>
-</section>
+    <?php endif; ?>
+
+    <form method="POST" action="index.php?page=profile&action=edit">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                class="form-control"
+                value="<?php echo htmlspecialchars($user['first_name'] ?? ''); ?>"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                class="form-control"
+                value="<?php echo htmlspecialchars($user['last_name'] ?? ''); ?>"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-control"
+                value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
+        </div>
+
+        <div class="form-group">
+            <label>Email (cannot be changed)</label>
+            <input
+                type="email"
+                class="form-control"
+                value="<?php echo htmlspecialchars($user['email'] ?? ''); ?>"
+                disabled>
+        </div>
+
+        <div style="margin-top:24px">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="index.php?page=profile" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

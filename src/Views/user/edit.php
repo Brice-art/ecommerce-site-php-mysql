@@ -1,47 +1,4 @@
 <div class="profile-container">
-    <style>
-        .profile-container {
-            max-width: 600px;
-            margin: 24px auto;
-            padding: 24px;
-            background: #fff;
-            border: 1px solid #e6e6e6;
-            border-radius: 8px
-        }
-
-        .form-group {
-            margin-bottom: 18px
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 14px
-        }
-
-        .alert-error {
-            padding: 12px;
-            background: #fee;
-            color: #c33;
-            border: 1px solid #fcc;
-            border-radius: 6px;
-            margin-bottom: 18px
-        }
-
-        .alert-error ul {
-            margin: 0;
-            padding-left: 20px
-        }
-    </style>
-
     <h2>Edit Profile</h2>
 
     <?php if (isset($errors) && !empty($errors)): ?>
@@ -96,7 +53,7 @@
                 disabled>
         </div>
 
-        <div style="margin-top:24px">
+        <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save Changes</button>
             <a href="index.php?page=profile" class="btn btn-secondary">Cancel</a>
         </div>

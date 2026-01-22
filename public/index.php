@@ -76,6 +76,9 @@ switch ($page) {
             case 'edit':
                 $controller->edit();
                 break;
+            case 'change_password':
+                $controller->changePassword();
+                break;
             default:
                 $controller->index();
         }

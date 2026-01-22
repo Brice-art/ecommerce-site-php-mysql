@@ -1,0 +1,105 @@
+/* ============================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   ============================================ */
+
+:root {
+  /* Colors - Primary */
+  --color-primary: #3498db;
+  --color-primary-dark: #2980b9;
+  --color-primary-light: #5dade2;
+  
+  /* Colors - Secondary */
+  --color-secondary: #95a5a6;
+  --color-secondary-dark: #7f8c8d;
+  
+  /* Colors - Text */
+  --color-text: #333;
+  --color-text-light: #7f8c8d;
+  --color-text-muted: #95a5a6;
+  --color-text-dark: #2c3e50;
+  
+  /* Colors - Background */
+  --color-bg: #f5f5f5;
+  --color-bg-light: #f8f9fa;
+  --color-bg-white: #ffffff;
+  --color-bg-dark: #2c3e50;
+  
+  /* Colors - Status */
+  --color-success: #27ae60;
+  --color-success-bg: #d4edda;
+  --color-success-text: #155724;
+  --color-success-border: #c3e6cb;
+  
+  --color-error: #e74c3c;
+  --color-error-bg: #fee;
+  --color-error-text: #c33;
+  --color-error-border: #fcc;
+  
+  --color-warning: #f39c12;
+  --color-info: #3498db;
+  
+  /* Colors - Gradients */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-light: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;      /* 24px */
+  --spacing-xl: 2rem;        /* 32px */
+  --spacing-2xl: 3rem;       /* 48px */
+  --spacing-3xl: 4rem;       /* 64px */
+  
+  /* Typography */
+  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-2xl: 1.5rem;   /* 24px */
+  --font-size-3xl: 2rem;     /* 32px */
+  --font-size-4xl: 2.5rem;   /* 40px */
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-base: 1.6;
+  --line-height-tight: 1.2;
+  
+  /* Borders */
+  --border-radius-sm: 5px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 15px;
+  --border-radius-full: 50%;
+  
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  --border-color: #e0e0e0;
+  --border-color-light: #ecf0f1;
+  --border-color-dark: #ddd;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-primary: 0 5px 15px rgba(52, 152, 219, 0.3);
+  
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-base: 0.3s;
+  --transition-slow: 0.5s;
+  
+  /* Layout */
+  --container-max-width: 1200px;
+  --container-padding: 20px;
+  
+  /* Z-index */
+  --z-navbar: 1000;
+  --z-dropdown: 100;
+  --z-modal: 2000;
+}

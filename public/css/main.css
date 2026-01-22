@@ -1,0 +1,240 @@
+/* ============================================
+   MAIN STYLESHEET - Imports all CSS modules
+   ============================================ */
+
+/* 1. Variables - Must be first */
+@import url('variables.css');
+
+/* 2. Base - Reset, Typography, Utilities */
+@import url('base.css');
+
+/* 3. Components - Reusable UI components */
+@import url('components.css');
+
+/* 4. Layout - Navbar, Footer, Containers */
+@import url('layout.css');
+
+/* 5. Pages - Page-specific styles */
+@import url('pages.css');
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .cart-content {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-summary {
+    position: static;
+  }
+
+  .products-layout {
+    grid-template-columns: 200px 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .profile-content {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero p {
+    font-size: var(--font-size-base);
+  }
+
+  .nav-menu {
+    gap: var(--spacing-md);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-form {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .search-btn,
+  .clear-search {
+    width: 100%;
+    padding: var(--spacing-md);
+  }
+
+  .top-detail {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .image-detail {
+    height: 300px;
+  }
+
+  .cart-section h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .cart-item {
+    grid-template-columns: 80px 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    position: relative;
+  }
+
+  .item-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .item-details {
+    grid-column: 2;
+  }
+
+  .item-details h3 {
+    font-size: var(--font-size-base);
+  }
+
+  .item-quantity {
+    grid-column: 1 / -1;
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .item-subtotal {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: var(--spacing-sm);
+  }
+
+  .item-remove {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+  }
+
+  .cart-summary {
+    margin-top: var(--spacing-xl);
+  }
+
+  .auth-section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .auth-card {
+    padding: var(--spacing-xl);
+    margin: 0 var(--spacing-md);
+  }
+
+  .auth-card h1 {
+    font-size: 1.75rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-remember {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .products-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .category-sidebar {
+    position: static;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .category-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-header-actions {
+    width: 100%;
+  }
+
+  .profile-header-actions .btn {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-row {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .order-action {
+    text-align: center;
+  }
+
+  .order-action .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .empty-cart {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+
+  .cart-items {
+    padding: var(--spacing-md);
+  }
+
+  .cart-summary {
+    padding: var(--spacing-lg);
+  }
+
+  .auth-card {
+    padding: var(--spacing-lg);
+  }
+
+  .auth-card h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .btn-large {
+    padding: 0.875rem var(--spacing-lg);
+    font-size: var(--font-size-base);
+  }
+}

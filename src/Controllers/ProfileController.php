@@ -107,6 +107,86 @@ class ProfileController
         ]);
     }
 
+    public function changePassword()
+    {
+        // Check login
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: index.php?page=login');
+            exit;
+        }
+
+        $userId = $_SESSION['user_id'];
+        $userEmail = $_SESSION['user_email'];
+
+        // If POST, process the password change
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $currentPassword = $_POST['current_password'] ?? '';
+            $newPassword = $_POST['new_password'] ?? '';
+            $confirmPassword = $_POST['confirm_password'] ?? '';
+
+            // Validation
+            $errors = [];
+
+            if (empty($currentPassword)) {
+                $errors[] = 'Current password is required';
+            }
+
+            if (empty($newPassword)) {
+                $errors[] = 'New password is required';
+            } elseif (strlen($newPassword) < 8) {
+                $errors[] = 'New password must be at least 8 characters';
+            }
+
+            if ($newPassword !== $confirmPassword) {
+                $errors[] = 'New password and confirm password do not match';
+            }
+
+            // Verify current password
+            if (empty($errors) && !$this->userModel->verifyPassword($userEmail, $currentPassword)) {
+                $errors[] = 'Current password is incorrect';
+            }
+
+            // Check if new password is same as current password
+            if (empty($errors) && $currentPassword === $newPassword) {
+                $errors[] = 'New password must be different from current password';
+            }
+
+            // If no errors, update password
+            if (empty($errors)) {
+                if ($this->userModel->updatePassword($userId, $newPassword)) {
+                    // Redirect to profile with success message
+                    $_SESSION['success_message'] = 'Password changed successfully!';
+                    header('Location: index.php?page=profile');
+                    exit;
+                } else {
+                    $errors[] = 'Failed to update password. Please try again.';
+                }
+            }
+
+            // Show form again with errors
+            $user = $this->userModel->getUserById($userId);
+            $cartItems = (new Cart())->getCartItems($userId, session_id());
+
+            $this->view('user/change_password', [
+                'user' => $user,
+                'errors' => $errors,
+                'title' => 'Change Password',
+                'count' => count($cartItems)
+            ]);
+            return;
+        }
+
+        // GET request - show form
+        $user = $this->userModel->getUserById($userId);
+        $cartItems = (new Cart())->getCartItems($userId, session_id());
+
+        $this->view('user/change_password', [
+            'user' => $user,
+            'title' => 'Change Password',
+            'count' => count($cartItems)
+        ]);
+    }
+
     // Load view with header/footer
     private function view($view, $data = [])
     {

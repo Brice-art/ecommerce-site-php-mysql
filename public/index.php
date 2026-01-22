@@ -9,11 +9,15 @@ require_once '../src/Models/Product.php';
 require_once '../src/Models/Category.php';
 require_once '../src/Models/Cart.php';
 require_once '../src/Models/User.php';
+require_once '../src/Models/Order.php';
 require_once '../src/Controllers/HomeController.php';
 require_once '../src/Controllers/ProductController.php';
 require_once '../src/Controllers/ProfileController.php';
 require_once '../src/Controllers/CartController.php';
 require_once '../src/Controllers/AuthController.php';
+require_once '../src/Controllers/OrderController.php';
+require_once '../src/Controllers/CheckoutController.php';
+require_once '../src/Models/OrderItem.php';
 
 // Simple routing
 $page = $_GET['page'] ?? 'home';
@@ -83,6 +87,34 @@ switch ($page) {
                 $controller->index();
         }
 
+        break;
+    case 'orders':
+        $controller = new OrderController();
+        $orderId = $_GET['id'] ?? null;
+        if ($orderId) {
+            $controller->show($orderId);
+        } else {
+            $controller->index();
+        }
+        break;
+
+    case 'checkout':
+        $controller = new CheckoutController();
+        $action = $_GET['action'] ?? 'shipping';
+        
+        switch ($action) {
+            case 'shipping':
+                $controller->shipping();
+                break;
+            case 'payment':
+                $controller->payment();
+                break;
+            case 'confirmation':
+                $controller->confirmation();
+                break;
+            default:
+                $controller->shipping();
+        }
         break;
 
     default:

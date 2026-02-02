@@ -22,6 +22,9 @@
                     <li><a href="index.php?page=cart">Cart (<?php echo $count ?? 0 ?>)</a></li>
 
                     <?php if (isset($_SESSION['user_id'])): ?>
+                        <?php if ($_SESSION['user_role'] == 'admin'): ?>
+                            <li><a href="index.php?page=admin">Dashboard</a></li>
+                        <?php endif; ?>
                         <li><a href="index.php?page=profile">Welcome, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?></a></li>
                         <li><a href="index.php?page=logout">Logout</a></li>
                     <?php else: ?>

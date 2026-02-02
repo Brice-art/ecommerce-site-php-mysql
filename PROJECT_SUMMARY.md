@@ -182,22 +182,29 @@ ecommerce-project/
    - Fixed 404 routing issue for profile edit
    - Routing now correctly uses `page=profile&action=edit`
 
+10. **Order Items Model** ✨ **FIXED (Jan 25)**
+   - Fixed PDOException: Field 'subtotal' doesn't have a default value
+   - Updated `OrderItem::createOrderItem()` to include subtotal calculation
+   - Added product_sku parameter to method
+   - Updated CheckoutController to pass all required columns (order_id, product_id, quantity, price, product_name, product_sku, subtotal)
+   - Order creation now fully functional
+
+11. **Profile Edit Handler** ✨ **COMPLETE (Jan 25)**
+   - Form GET → Shows edit form with validation
+   - Form POST → Updates user in database
+   - Includes validation for first/last name
+   - Redirects to profile with success message
+   - Updates session with new name
+
 ---
 
 ## Known Issues / To-Do
 
 ### 🔴 High Priority (Blocking)
-1. **Profile Edit Handler** - `ProfileController::edit()` loads the edit form but there's no `update()` or save handler
-   - Form posts to `index.php?page=user` but no route catches it
-   - Need to add:
-     - POST handler in router (add `case 'update':` or similar)
-     - `ProfileController::update()` method
-     - Validation & database update logic
-
-2. **Missing Route for Edit Form Post**
-   - Current form action: `index.php?page=user` (doesn't exist)
-   - Should post to: `index.php?page=profile&action=update` 
-   - Or add `case 'user':` route to index.php
+1. **Test Complete Checkout Flow**
+   - Order items now fixed - test end-to-end
+   - Add to cart → Shipping → Payment → Order creation
+   - Verify order and order_items appear in database
 
 ### 🟡 Medium Priority
 1. **Change Password Page** - Linked but not built
@@ -218,18 +225,15 @@ ecommerce-project/
 
 ## Next Steps (Recommended Order)
 
-### Phase 1: Fix Profile Edit (Required)
-- [ ] Add `case 'profile':` route handler for POST in `public/index.php`
-- [ ] Create `ProfileController::update()` method
-- [ ] Add validation and error handling
-- [ ] Update database via User model
-- [ ] Redirect with success/error message
+### Phase 1: Core Functionality (Current)
+- [ ] **Test checkout** → Verify orders and order_items save correctly (order items bug fixed)
+- [ ] **Profile edit handler** → Add POST route and update() method
+- [ ] **Change password** → Build form and handler
 
-### Phase 2: Build Additional Features
-- [ ] Password change page
-- [ ] Email verification
-- [ ] Product reviews
-- [ ] Wishlist
+### Phase 2: User Features
+- [ ] Order history/details page
+- [ ] Order tracking
+- [ ] Email notifications
 
 ### Phase 3: Admin & Advanced
 - [ ] Admin dashboard
@@ -275,5 +279,5 @@ GET/POST /index.php?page=logout            → AuthController::logout()
 
 ---
 
-**Last Updated:** January 22, 2026  
-**Status:** In Development - Profile UI Complete, Profile Edit Handler Pending
+**Last Updated:** January 25, 2026  
+**Status:** In Development - Order Items & Profile Edit Complete, Checkout Testing & Change Password Next

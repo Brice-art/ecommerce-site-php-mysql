@@ -31,7 +31,7 @@ class AuthController
 
             // Check if user exists
             $user = $this->userModel->getUserByEmail($email);
-            
+
             if (!$user) {
                 $error = 'Invalid email or password';
                 $this->view('user/login', [

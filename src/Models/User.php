@@ -15,6 +15,12 @@ class User
         $this->db = new Database();
     }
 
+    public function getAllUsers() {
+        $this->db->query('SELECT * FROM users WHERE is_active = :is_active;');
+        $this->db->bind(':is_active', 1);
+        return $this->db->resultSet();
+    }
+
     public function getUserByEmail($email)
     {
         $this->db->query('SELECT * FROM users WHERE email = :email;');

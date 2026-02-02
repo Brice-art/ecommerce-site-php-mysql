@@ -79,7 +79,7 @@ $title = $title ?? 'Order Details';
                                 <div class="order-item-row">
                                     <div class="item-image">
                                         <?php if (!empty($item['main_image'])): ?>
-                                            <img src="<?php echo htmlspecialchars($item['main_image']); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'Product'); ?>">
+                                            <img src="images/products/<?php echo htmlspecialchars($item['main_image']); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'Product'); ?>">
                                         <?php else: ?>
                                             <div class="no-image">No Image</div>
                                         <?php endif; ?>

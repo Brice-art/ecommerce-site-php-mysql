@@ -18,6 +18,7 @@ require_once '../src/Controllers/AuthController.php';
 require_once '../src/Controllers/OrderController.php';
 require_once '../src/Controllers/CheckoutController.php';
 require_once '../src/Models/OrderItem.php';
+require_once '../src/Controllers/AdminController.php';
 
 // Simple routing
 $page = $_GET['page'] ?? 'home';
@@ -101,7 +102,7 @@ switch ($page) {
     case 'checkout':
         $controller = new CheckoutController();
         $action = $_GET['action'] ?? 'shipping';
-        
+
         switch ($action) {
             case 'shipping':
                 $controller->shipping();
@@ -114,6 +115,39 @@ switch ($page) {
                 break;
             default:
                 $controller->shipping();
+        }
+        break;
+
+    case 'admin':
+        $controller = new AdminController();
+
+        // Check if user is admin
+        if (!$controller->isAdmin()) {
+            header('Location: index.php?page=home');
+            exit;
+        }
+
+        $action = $_GET['action'] ?? 'dashboard';
+
+        switch ($action) {
+            case 'dashboard':
+                $controller->dashboard();
+                break;
+            case 'products':
+                $controller->products();
+                break;
+            case 'create-product':
+                $controller->createProduct();
+                break;
+            case 'users':
+                $controller->users();
+                break;
+            case 'orders':
+                $controller->orders();
+                break;
+            default:
+                $controller->dashboard();
+                break;
         }
         break;
 

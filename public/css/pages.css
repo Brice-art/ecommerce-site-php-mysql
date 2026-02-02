@@ -267,6 +267,16 @@
   gap: var(--spacing-md);
 }
 
+.dashboard-order-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 1.25rem;
+  background: var(--color-bg-light);
+  border-radius: 10px;
+  gap: var(--spacing-md);
+}
+
 .order-info {
   display: flex;
   flex-direction: column;

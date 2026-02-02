@@ -94,6 +94,18 @@ class Order
         return $this->db->single();
     }
 
+    public function getAllOrders(){
+        $this->db->query('SELECT * FROM orders;');
+        return $this->db->resultSet();
+    }
+
+    // Get orders with a specific status
+    public function getOrdersByStatus($status) {
+        $this->db->query('SELECT * FROM orders WHERE status = :status;');
+        $this->db->bind(':status', $status);
+        return $this->db->resultSet();
+    }
+
     public function getOrdersByUserId($userId)
     {
         $this->db->query('SELECT * FROM orders WHERE user_id = :userId ORDER BY created_at DESC');
@@ -172,6 +184,11 @@ class Order
     {
         $this->db->query('SELECT SUM(total) as total FROM orders WHERE user_id = :userId');
         $this->db->bind(':userId', $userId);
+        return $this->db->single()['total'];
+    }
+
+    public function getRevenue() {
+        $this->db->query('SELECT SUM(total) as total FROM orders;');
         return $this->db->single()['total'];
     }
 

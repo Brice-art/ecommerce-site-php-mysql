@@ -145,6 +145,9 @@ switch ($page) {
             case 'orders':
                 $controller->orders();
                 break;
+            case 'edit-product':
+                $controller->edit();
+                break;
             default:
                 $controller->dashboard();
                 break;

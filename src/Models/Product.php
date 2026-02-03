@@ -220,10 +220,10 @@ class Product
         $this->db->query("
             INSERT INTO products (
                 category_id, name, slug, description, price, 
-                compare_price, sku, quantity, main_image, is_featured, is_active
+                compare_price, cost_price, sku, weight, quantity, main_image, is_featured, is_active
             ) VALUES (
                 :category_id, :name, :slug, :description, :price,
-                :compare_price, :sku, :quantity, :main_image, :is_featured, :is_active
+                :compare_price, :cost_price, :sku, :weight, :quantity, :main_image, :is_featured, :is_active
             )
         ");
 
@@ -233,8 +233,10 @@ class Product
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':compare_price', $data['compare_price'] ?? null);
+        $this->db->bind(':cost_price', $data['cost_price']);
         $this->db->bind(':sku', $data['sku']);
         $this->db->bind(':quantity', $data['quantity']);
+        $this->db->bind(':weight', $data['weight']);
         $this->db->bind(':main_image', $data['main_image'] ?? null);
         $this->db->bind(':is_featured', $data['is_featured'] ?? 0);
         $this->db->bind(':is_active', $data['is_active'] ?? 1);
@@ -263,8 +265,10 @@ class Product
                 description = :description,
                 price = :price,
                 compare_price = :compare_price,
+                cost_price = :cost_price,
                 sku = :sku,
                 quantity = :quantity,
+                weight = :weight,
                 main_image = :main_image,
                 is_featured = :is_featured,
                 is_active = :is_active
@@ -278,8 +282,10 @@ class Product
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':compare_price', $data['compare_price'] ?? null);
+        $this->db->bind(':cost_price', $data['cost_price']);
         $this->db->bind(':sku', $data['sku']);
         $this->db->bind(':quantity', $data['quantity']);
+        $this->db->bind(':weight', $data['weight']);
         $this->db->bind(':main_image', $data['main_image'] ?? null);
         $this->db->bind(':is_featured', $data['is_featured'] ?? 0);
         $this->db->bind(':is_active', $data['is_active'] ?? 1);

@@ -3,19 +3,22 @@
    ============================================ */
 
 /* 1. Variables - Must be first */
-@import url('variables.css');
+@import url("variables.css");
 
 /* 2. Base - Reset, Typography, Utilities */
-@import url('base.css');
+@import url("base.css");
 
 /* 3. Components - Reusable UI components */
-@import url('components.css');
+@import url("components.css");
 
 /* 4. Layout - Navbar, Footer, Containers */
-@import url('layout.css');
+@import url("layout.css");
 
 /* 5. Pages - Page-specific styles */
-@import url('pages.css');
+@import url("pages.css");
+
+/* 6. Admin dashboard */
+@import url("admin.css");
 
 /* ============================================
    RESPONSIVE DESIGN

@@ -10,11 +10,12 @@ class ProductController
 
     public function index()
     {
-        // Get search and category filters
+        // Get search, category, and filter parameters
         $searchTerm = $_GET['search'] ?? '';
         $categoryId = $_GET['category'] ?? null;
+        $filter = $_GET['filter'] ?? null; // NEW
 
-        // Get all categories for sidebar
+        // Get all categories for tabs
         $categoryModel = new Category();
         $categories = $categoryModel->getAllCategories();
 
@@ -22,9 +23,14 @@ class ProductController
         if (!empty($searchTerm)) {
             $allProducts = $this->productModel->searchProducts($searchTerm);
             $title = 'Search Results';
+        } elseif ($filter === 'featured') { // NEW
+            $allProducts = $this->productModel->getFeaturedProducts(100);
+            $title = 'Featured Products';
+        } elseif ($filter === 'latest') { // NEW
+            $allProducts = $this->productModel->getLatestProducts(100);
+            $title = 'Latest Products';
         } elseif ($categoryId) {
             $allProducts = $this->productModel->getProductsByCategory($categoryId);
-            // Get category name
             $selectedCategory = $categoryModel->getCategoryById($categoryId);
             $title = $selectedCategory['name'] ?? 'Products';
         } else {
@@ -32,18 +38,12 @@ class ProductController
             $title = 'All Products';
         }
 
-        $userId = $_SESSION['user_id'] ?? null;
-        $sessionId = session_id();
-
-        $cartItems = (new Cart())->getCartItems($userId, $sessionId);
-
         // Pass to view
         $this->view('products/list', [
             'allProducts' => $allProducts,
             'categories' => $categories,
             'selectedCategory' => $categoryId,
-            'title' => $title,
-            'count' => count($cartItems)
+            'title' => $title
         ]);
     }
 

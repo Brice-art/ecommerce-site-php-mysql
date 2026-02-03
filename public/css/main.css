@@ -20,6 +20,9 @@
 /* 6. Admin dashboard */
 @import url("admin.css");
 
+/* 7. Home page compact */
+@import url("compact.css");
+
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */

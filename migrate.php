@@ -23,16 +23,26 @@ require_once BASE_PATH . '/config/database.php';
 // Load Migrator class
 require_once BASE_PATH . '/src/Database/Migrator.php';
 
+/**
+ * Resolve env vars consistently in CLI.
+ * Dotenv populates $_ENV/$_SERVER; getenv() may be empty.
+ */
+function envValue(string $key, ?string $default = null): ?string
+{
+    $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
+    return ($value === false || $value === null || $value === '') ? $default : (string)$value;
+}
+
 // Check command
 $command = $argv[1] ?? 'help';
 
 try {
     // Get database connection
-    $dsn = "mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME') . ";charset=utf8mb4";
+    $dsn = "mysql:host=" . envValue('DB_HOST', 'localhost') . ";dbname=" . envValue('DB_NAME', '') . ";charset=utf8mb4";
     $pdo = new PDO(
         $dsn,
-        getenv('DB_USER'),
-        getenv('DB_PASS'),
+        envValue('DB_USER', ''),
+        envValue('DB_PASS', ''),
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

@@ -73,7 +73,7 @@ class Migrator
             try {
                 $sql = file_get_contents($file);
 
-                // Wrap each migration in a transaction — all or nothing
+                // Try transaction, but MySQL DDL can auto-commit implicitly.
                 $this->pdo->beginTransaction();
 
                 // Split on semicolons and execute each statement individually
@@ -92,7 +92,9 @@ class Migrator
                 );
                 $stmt->execute([':name' => $name, ':batch' => $batch]);
 
-                $this->pdo->commit();
+                if ($this->pdo->inTransaction()) {
+                    $this->pdo->commit();
+                }
 
                 echo "✓ Migrated: {$name}\n";
                 $successful++;
@@ -165,7 +167,9 @@ class Migrator
                     "DELETE FROM {$this->migrationsTable} WHERE name = :name"
                 )->execute([':name' => $migration['name']]);
 
-                $this->pdo->commit();
+                if ($this->pdo->inTransaction()) {
+                    $this->pdo->commit();
+                }
 
                 echo "✓ Rolled back: {$migration['name']}\n";
 

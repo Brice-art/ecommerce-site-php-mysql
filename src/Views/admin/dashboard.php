@@ -1,4 +1,14 @@
 <!-- Admin Dashboard -->
+<?php
+
+usort($allUsers, function ($a, $b) {
+    return $b['created_at'] <=> $a['created_at'];
+});
+
+usort($allOrders, function ($a, $b) {
+    return $b['created_at'] <=> $a['created_at'];
+});
+?>
 <section class="admin-section">
     <div class="container">
         <!-- Welcome Header -->
